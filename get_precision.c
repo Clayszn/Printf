@@ -6,7 +6,7 @@
  * @i: vl of arguments
  * @vl: vl of arguments.
  *
- * Return: Precision.
+ * Return: Precision
  */
 int get_precision(const char *format, int *i, va_list vl)
 {

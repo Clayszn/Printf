@@ -7,7 +7,7 @@
  *
  * Return: Precision.
  */
-int get_size(const char *format, int *m)
+int get_size(const char *format, int *i)
 {
 	int curr_m = *m + 1;
 	int size = 0;
@@ -18,7 +18,7 @@ int get_size(const char *format, int *m)
 		size = S_SHORT;
 
 	if (size == 0)
-		*i = curr_m - 1;
+		*m = curr_m - 1;
 	else
 		*m = curr_m;
 

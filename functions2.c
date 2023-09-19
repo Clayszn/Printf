@@ -14,10 +14,10 @@
 int print_pointer(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	char extra_c = 0, padd = ' ';
-	int ind = BUFF_SIZE - 2, length = 2, padd_start = 1; /* length=2, for '0x' */
-	unsigned long num_addrs;
-	char map_to[] = "0123456789abcdef";
+	char ext_m = 0, padd = ' ';
+	int mar = BUFF_SIZE - 2, length = 2, padd_start = 1; /* length=2, for '0x' */
+	unsigned long num_adds;
+	char map_too[] = "0123456789abcdef";
 	void *addrs = va_arg(types, void *);
 
 	UNUSED(width);
@@ -29,27 +29,28 @@ int print_pointer(va_list types, char buffer[],
 	buffer[BUFF_SIZE - 1] = '\0';
 	UNUSED(precision);
 
-	num_addrs = (unsigned long)addrs;
+	num_adds = (unsigned long)addrs;
 
-	while (num_addrs > 0)
+	while (num_adds > 0)
 	{
-		buffer[ind--] = map_to[num_addrs % 16];
-		num_addrs /= 16;
+		buffer[mar--] = map_too[num_adds % 16];
+		num_adds /= 16;
 		length++;
 	}
 
 	if ((flags & F_ZERO) && !(flags & F_MINUS))
 		padd = '0';
 	if (flags & F_PLUS)
-		extra_c = '+', length++;
+		ext_m = '+', length++;
 	else if (flags & F_SPACE)
-		extra_c = ' ', length++;
+		ext_m = ' ', length++;
 
-	ind++;
+	mar++;
 
 	/*return (write(1, &buffer[i], BUFF_SIZE - i - 1));*/
-	return (write_pointer(buffer, ind, length,
-		width, flags, padd, extra_c, padd_start));
+	return (write_pointer(buffer, mar, length,
+		width, flags, padd, ext_m, padd_start));
+
 }
 
 /************************* PRINT NON PRINTABLE *************************/
